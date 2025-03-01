@@ -28,6 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("confirmarBtn").addEventListener("click", () => {
         alert("Palpites confirmados com sucesso! Obrigado por participar.");
         localStorage.removeItem("palpitesConfirmacao"); // Limpa os palpites do cache
-        window.location.href = "index.html"; // Redireciona para a página inicial
+        window.location.href = "obrigado.html"; // Redireciona para a página de obrigado
     });
 });
