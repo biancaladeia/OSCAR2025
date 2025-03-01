@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirme seus Palpites</title>
-  <link rel="stylesheet" href="styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação dos Palpites</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <h1>Confirmação dos Palpites</h1>
-  <div id="resumo-palpite"></div>
-  <button onclick="finalizar()">Finalizar Aposta</button>
+    <h1>CONFIRMAÇÃO DOS PALPITES</h1>
 
-  <script>
-    function finalizar() {
-      window.location.href = "obrigado.html";
-    }
-  </script>
+    <div id="confirmacao-container"></div>
+    
+    <button onclick="finalizarBolao()">Finalizar Aposta</button>
+
+    <script>
+        const nomeUsuario = sessionStorage.getItem("nomeUsuario");
+        const palpites = JSON.parse(sessionStorage.getItem("palpites"));
+
+        if (!nomeUsuario || !palpites) {
+            alert("Erro ao carregar os palpites.");
+            window.location.href = "index.html";
+        }
+
+        const container = document.getElementById("confirmacao-container");
+        container.innerHTML = `<h2>Nome: ${nomeUsuario}</h2>`;
+
+        for (const categoria in palpites) {
+            container.innerHTML += `<p><strong>${categoria}:</strong> ${palpites[categoria]}</p>`;
+        }
+
+        function finalizarBolao() {
+            alert("Sua aposta foi confirmada! Aguarde o ranking.");
+            window.location.href = "obrigado.html";
+        }
+    </script>
 </body>
 </html>

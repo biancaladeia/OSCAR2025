@@ -1,32 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bolão do Oscar 2025 de Bibi</title>
-  <link rel="stylesheet" href="styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolão do Oscar 2025</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Bem-vindo ao Bolão do Oscar 2025 de Bibi</h1>
-    <p>Insira seu nome para começar:</p>
-    <input type="text" id="nome" placeholder="Digite seu nome">
-    <button onclick="salvarNome()">Iniciar</button>
-  </div>
+    <h1>Bolão do Oscar 2025 de Bibi
+    
+    <form id="nome-form">
+        <label for="nome">Digite seu nome para participar:</label>
+        <input type="text" id="nome" required>
+        <button type="submit">Iniciar Palpites</button>
+    </form>
 
-  <script>
-    function salvarNome() {
-      const nome = document.getElementById("nome").value;
-      if (!nome) {
-        alert("Por favor, insira seu nome!");
-        return;
-      }
-      localStorage.setItem("nomeUsuario", nome);
-      window.location.href = "palpites.html";
-    }
-  </script>
+    <script>
+        document.getElementById("nome-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const nomeUsuario = document.getElementById("nome").value.trim();
 
-  <script src="scripts/main.js"></script>
+            if (!nomeUsuario) {
+                alert("Por favor, insira um nome válido.");
+                return;
+            }
+
+            sessionStorage.setItem("nomeUsuario", nomeUsuario);
+            window.location.href = "palpites.html";
+        });
+    </script>
+
+    <script src="scripts/main.js"></script>
 
 </body>
 </html>

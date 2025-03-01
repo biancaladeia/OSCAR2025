@@ -1,6 +1,17 @@
 import { db } from "./firebase.js";
 import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+
+// Recuperar o nome do usuário do sessionStorage
+const nomeUsuario = sessionStorage.getItem("nomeUsuario");
+
+// Se não houver nome salvo, redireciona para a página inicial
+if (!nomeUsuario) {
+    alert("Você precisa inserir seu nome antes de participar.");
+    window.location.href = "index.html";
+}
+
+
 // Lista de categorias e opções disponíveis
 const categorias = {
     "Melhor Filme": [
@@ -85,25 +96,34 @@ const categorias = {
 };
 
 // Criando o formulário dinamicamente
-const form = document.getElementById("form-palpite");
+const container = document.getElementById("categorias-container");
+
 for (const categoria in categorias) {
     const div = document.createElement("div");
     div.classList.add("categoria-box");
     div.innerHTML = `<h3>${categoria}</h3>`;
 
     categorias[categoria].forEach(opcao => {
-        div.innerHTML += `
-            <label>
-                <input type="radio" name="${categoria}" value="${opcao}" required>
-                <span>${opcao}</span>
-            </label><br>`;
+        const label = document.createElement("label");
+        label.classList.add("opcao-label");
+
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = categoria;
+        radio.value = opcao;
+        radio.required = true;
+
+        label.appendChild(radio);
+        label.innerHTML += `<span>${opcao}</span>`; // Adiciona o texto ao lado do botão
+
+        div.appendChild(label);
     });
 
-    form.appendChild(div);
+    container.appendChild(div);
 }
 
 // Evento para salvar os palpites no Firebase
-form.addEventListener("submit", async (e) => {
+document.getElementById("form-palpite").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const nomeUsuario = prompt("Digite seu nome para salvar seu palpite:");

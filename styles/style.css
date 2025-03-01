@@ -179,3 +179,36 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Estiliza cada opção de palpite */
+.opcao-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2em;
+    color: #F5F5F5;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+/* Ajusta o botão para ficar abaixo de todas as categorias */
+form button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    margin: 20px auto;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #D4AF37;
+    color: #0A0A0A;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background-color: #B8860B;
+    transform: scale(1.05);
+}
