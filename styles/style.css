@@ -1,5 +1,5 @@
 /* ======= Importação de Fontes ======= */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto+Condensed:wght@400;700&display=swap');
 
 /* ======= Estilo Global ======= */
 * {
@@ -8,39 +8,50 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    overflow-x: hidden;
+    width: 100%;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
-    background: #0A0A0A;
+    background-color: #0A0A0A;
     color: #F5F5F5;
-    background: url('https://bolaomoviecom.com.br/img/bg.jpg') no-repeat center center/cover;
     min-height: 100vh;
+    position: relative;
 }
 
-/* ====== Títulos ====== */
-h1 {
-    font-size: 2.8em;
-    color: #D4AF37;
-    font-family: 'Playfair Display', serif;
-    margin-bottom: 20px;
+/* ======= Background com imagens decorativas ======= */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/bg.jpg') no-repeat center center / cover;
+    z-index: -3;
 }
 
-h2 {
-    font-size: 1.8em;
-    color: #ffffff;
-    font-weight: 700;
+/* Confetes e brilhos */
+.confete, .brilho {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+    background-size: cover;
 }
 
-h3 {
-    font-size: 1.5em;
-    color: #D4AF37;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-align: left;
-    padding-left: 10px;
+.confete {
+    background-image: url('img/confetes.png');
 }
 
-/* ====== Container principal ====== */
+.brilho {
+    background-image: url('img/brilhos.png');
+}
+
+/* ====== Estrutura Central ====== */
 .container {
     display: flex;
     flex-direction: column;
@@ -49,37 +60,57 @@ h3 {
     height: 100vh;
 }
 
-.form-container {
+.box {
     background: rgba(0, 0, 0, 0.85);
-    padding: 25px;
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(212, 175, 55, 0.4);
-    max-width: 400px;
+    max-width: 500px;
     width: 90%;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
+/* ======= Títulos ======= */
+h1 {
+    font-size: 2.8em;
+    font-weight: 600;
+    color: #D4AF37;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.8em;
+    font-weight: 400;
+    color: #F5F5F5;
+    margin-bottom: 15px;
+}
+
+/* ======= Inputs e Formulário ======= */
 input {
     width: 100%;
     padding: 12px;
-    margin: 15px 0;
-    border: 2px solid #D4AF37;
-    border-radius: 8px;
-    font-size: 1.1em;
+    margin: 10px 0;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    font-size: 1.2em;
     text-align: center;
-    background: transparent;
-    color: #fff;
+    background-color: #1C1C1C;
+    color: #F5F5F5;
+    transition: border 0.3s ease-in-out;
 }
 
-input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+input:focus {
+    border: 2px solid #D4AF37;
+    outline: none;
 }
 
+/* ======= Botões ======= */
 button {
     background-color: #D4AF37;
     color: #0A0A0A;
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 12px 25px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -93,6 +124,54 @@ button {
 button:hover {
     background-color: #B8860B;
     transform: scale(1.05);
+}
+
+/* ====== Estilizando os Radio Buttons ====== */
+.opcao-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D4AF37;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+input[type="radio"]:checked::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-color: #D4AF37;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ====== Caixa Flutuante do Contador ====== */
+#contador-palpite {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #D4AF37;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
 }
 
 /* ====== Estilizando os palpites ====== */
@@ -150,4 +229,11 @@ input[type="radio"]:checked::before {
 button[type="submit"] {
     margin-top: 20px;
     font-size: 1.3em;
+}
+
+/* ======= Ajuste para garantir que o fundo não suma ======= */
+@media (max-width: 768px) {
+    body::before {
+        background-attachment: fixed;
+    }
 }
