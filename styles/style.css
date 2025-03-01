@@ -9,29 +9,23 @@
 }
 
 html, body {
-    overflow-x: hidden;
     width: 100%;
+    min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
-    background-color: #0A0A0A;
     color: #F5F5F5;
-    min-height: 100vh;
+    background-color: #0A0A0A;
     position: relative;
+    overflow-x: hidden;
 }
 
-/* ======= Background com imagens decorativas ======= */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('img/bg.jpg') no-repeat center center / cover;
-    z-index: -3;
+/* ======= Background Fixo ======= */
+body {
+    background: url('img/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
 
-/* Confetes e brilhos */
+/* ======= Confetes e Brilhos ======= */
 .confete, .brilho {
     position: fixed;
     top: 0;
@@ -39,16 +33,19 @@ body::before {
     width: 100%;
     height: 100%;
     z-index: -2;
-    pointer-events: none;
     background-size: cover;
+    pointer-events: none;
 }
 
 .confete {
-    background-image: url('img/confetes.png');
+    background: url('img/confetes.png') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .brilho {
-    background-image: url('img/brilhos.png');
+    background: url('img/brilhos.png') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -1;
 }
 
 /* ====== Estrutura Central ====== */
@@ -229,11 +226,4 @@ input[type="radio"]:checked::before {
 button[type="submit"] {
     margin-top: 20px;
     font-size: 1.3em;
-}
-
-/* ======= Ajuste para garantir que o fundo não suma ======= */
-@media (max-width: 768px) {
-    body::before {
-        background-attachment: fixed;
-    }
 }
