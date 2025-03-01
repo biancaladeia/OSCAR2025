@@ -3,7 +3,7 @@ import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8
 
 // Aguarda o carregamento do DOM
 document.addEventListener("DOMContentLoaded", async () => { 
-     // Obtém o nome do usuário do localStorage
+    // Obtém o nome do usuário do localStorage
     const nomeUsuario = localStorage.getItem("nomeUsuario");
 
     if (!nomeUsuario) {
@@ -97,67 +97,67 @@ const categorias = {
     ]
 };
 
- // Criar formulário dinâmico
- const form = document.getElementById("form-palpite");
- const categoriasContainer = document.getElementById("categorias-container");
+for (const categoria in categorias) {
+    const div = document.createElement("div");
+    div.classList.add("categoria-box");
 
- for (const categoria in categorias) {
-     const div = document.createElement("div");
-     div.classList.add("categoria-box");
+    const titulo = document.createElement("h3");
+    titulo.textContent = categoria;
+    div.appendChild(titulo);
 
-     const titulo = document.createElement("h3");
-     titulo.textContent = categoria;
-     div.appendChild(titulo);
+    categorias[categoria].forEach(opcao => {
+        const label = document.createElement("label");
+        label.classList.add("opcao-label");
 
-     categorias[categoria].forEach(opcao => {
-         const label = document.createElement("label");
-         label.classList.add("opcao-label");
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = categoria;
+        input.value = opcao;
+        input.required = true;
 
-         const input = document.createElement("input");
-         input.type = "radio";
-         input.name = categoria;
-         input.value = opcao;
-         input.required = true;
+        const span = document.createElement("span");
+        span.textContent = opcao;
 
-         const span = document.createElement("span");
-         span.textContent = opcao;
+        label.appendChild(input);
+        label.appendChild(span);
+        div.appendChild(label);
+    });
 
-         label.appendChild(input);
-         label.appendChild(span);
-         div.appendChild(label);
-     });
-
-     categoriasContainer.appendChild(div);
- }
+    categoriasContainer.appendChild(div);
+}
 
  // Evento de envio do formulário
  form.addEventListener("submit", async (e) => {
-     e.preventDefault();
+    e.preventDefault();
 
-     const palpites = {};
-     for (const categoria in categorias) {
-         const selecionado = document.querySelector(`input[name="${categoria}"]:checked`);
-         if (selecionado) {
-             palpites[categoria] = selecionado.value;
-         } else {
-             alert(`Você precisa selecionar uma opção para: ${categoria}`);
-             return;
-         }
-     }
+    const palpites = {};
+    for (const categoria in categorias) {
+        const selecionado = document.querySelector(`input[name="${categoria}"]:checked`);
+        if (selecionado) {
+            palpites[categoria] = selecionado.value;
+        } else {
+            alert(`Você precisa selecionar uma opção para: ${categoria}`);
+            return;
+        }
+    }
 
-     try {
+    try {
         console.log("Salvando palpites no Firebase para usuário:", nomeUsuario);
         console.log("Dados enviados:", palpites);
 
-        await setDoc(doc(collection(db, "palpites"), nomeUsuario), palpites);
+        await setDoc(doc(collection(db, "palpites"), nomeUsuario), { palpites });
 
-        alert("Palpites salvos com sucesso!");
-        window.location.href = "confirmar.html"; // Redireciona para a página de confirmação
+        // Salva os palpites no localStorage para exibição na página de confirmação
+        localStorage.setItem("palpitesConfirmacao", JSON.stringify(palpites));
+
+        console.log("Palpites salvos! Redirecionando para a página de confirmação...");
+        setTimeout(() => {
+            window.location.href = "confirmar.html";
+        }, 500);
+
     } catch (error) {
         console.error("Erro ao salvar no Firebase:", error);
         alert("Erro ao salvar os palpites. Verifique o console para mais detalhes.");
     }
- });
 });
-
-console.log("Firebase conectado:", db);
+});

@@ -7,32 +7,12 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <h1>CONFIRMAÇÃO DOS PALPITES</h1>
-
-    <div id="confirmacao-container"></div>
-    
-    <button onclick="finalizarBolao()">Finalizar Aposta</button>
-
-    <script>
-        const nomeUsuario = sessionStorage.getItem("nomeUsuario");
-        const palpites = JSON.parse(sessionStorage.getItem("palpites"));
-
-        if (!nomeUsuario || !palpites) {
-            alert("Erro ao carregar os palpites.");
-            window.location.href = "index.html";
-        }
-
-        const container = document.getElementById("confirmacao-container");
-        container.innerHTML = `<h2>Nome: ${nomeUsuario}</h2>`;
-
-        for (const categoria in palpites) {
-            container.innerHTML += `<p><strong>${categoria}:</strong> ${palpites[categoria]}</p>`;
-        }
-
-        function finalizarBolao() {
-            alert("Sua aposta foi confirmada! Aguarde o ranking.");
-            window.location.href = "obrigado.html";
-        }
-    </script>
+    <div class="container">
+        <h1>CONFIRMAÇÃO DOS PALPITES</h1>
+        <p>Confira suas escolhas antes de finalizar.</p>
+        <div id="lista-confirmacao" class="confirmacao-box"></div>
+        <button id="confirmarBtn">Confirmar Palpites</button>
+    </div>
+    <script src="scripts/confirmar.js"></script>
 </body>
 </html>
