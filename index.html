@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>BOLÃO DO OSCAR 2025</h1>
+        <h1>BOLÃO DO OSCAR 2025 DE BIBI</h1>
         <div class="form-container">
             <h2>Digite seu nome para participar:</h2>
             <input type="text" id="nomeUsuario" placeholder="Seu Nome" required>
@@ -19,13 +19,17 @@
     <script>
         document.getElementById("iniciarBtn").addEventListener("click", function() {
             const nome = document.getElementById("nomeUsuario").value.trim();
-            if (nome === "") {
-                alert("Por favor, digite seu nome!");
+            if (!nome) {
+                alert("Nome é obrigatório!");
                 return;
             }
-            localStorage.setItem("nomeUsuario", nome);
-            window.location.href = "palpites.html";
+            localStorage.setItem("nomeUsuario", nome); // Salva o nome no localStorage
+            window.location.href = "palpites.html"; // Redireciona para os palpites
         });
     </script>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/palpites.js"></script>
+    <script src="scripts/firebase.js"></script>
 </body>
 </html>

@@ -22,30 +22,28 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
+    height: 100vh;
 }
 
-/* ====== Título ====== */
 h1 {
     font-size: 2.5em;
     color: #D4AF37;
     margin-bottom: 20px;
 }
 
-/* ====== Formulário ====== */
 .form-container {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     padding: 20px;
     border-radius: 10px;
     width: 90%;
     max-width: 600px;
+    text-align: center;
 }
 
-/* ====== Campo de entrada de nome ====== */
+/* ====== Estilizando input de nome ====== */
 input {
     width: 80%;
-    padding: 12px;
+    padding: 10px;
     margin: 10px 0;
     border: none;
     border-radius: 5px;
@@ -53,7 +51,7 @@ input {
     text-align: center;
 }
 
-/* ====== Botões ====== */
+/* ====== Botão principal ====== */
 button {
     background-color: #D4AF37;
     color: #0A0A0A;
@@ -81,33 +79,42 @@ button:hover {
     flex-direction: column;
     align-items: center;
     width: 90%;
-    max-width: 600px;
+    max-width: 700px;
     margin: auto;
 }
 
-/* ====== Cada categoria ====== */
+/* Caixa de cada categoria */
 .categoria-box {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     padding: 15px;
     border-radius: 10px;
     width: 100%;
     margin-bottom: 20px;
+    text-align: left;
 }
 
-/* ====== Alinhamento das opções ====== */
+/* Estilo do título da categoria */
+.categoria-box h3 {
+    color: #D4AF37;
+    text-align: center;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+/* Estilização das opções */
 .opcao-label {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 10px;
     font-size: 1.1em;
-    margin: 5px 0;
+    margin: 8px 0;
+    padding: 5px;
 }
 
-/* Ajuste para os inputs de rádio */
+/* Melhor alinhamento dos radio buttons */
 .opcao-label input[type="radio"] {
-    width: 18px;
-    height: 18px;
+    transform: scale(1.2);
 }
 
 /* Botão de confirmação no final */

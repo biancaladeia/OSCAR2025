@@ -1,11 +1,17 @@
 import { db } from "./firebase.js";
 import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// Obtendo o nome do usuário armazenado no LocalStorage
-const nomeUsuario = localStorage.getItem("nomeUsuario");
-if (!nomeUsuario) {
-    window.location.href = "index.html"; // Redireciona para a página inicial se o nome não estiver salvo
-}
+// Aguarda o carregamento do DOM
+document.addEventListener("DOMContentLoaded", async () => { 
+     // Obtém o nome do usuário do localStorage
+    const nomeUsuario = localStorage.getItem("nomeUsuario");
+
+    if (!nomeUsuario) {
+        alert("Erro: Nome do usuário não encontrado! Retornando para o início.");
+        window.location.href = "index.html"; // Redireciona caso o nome não esteja salvo
+        return;
+    }
+
 
 // Lista de categorias e opções disponíveis
 const categorias = {
@@ -90,42 +96,61 @@ const categorias = {
     ]
 };
 
-// Criar formulário dinâmico
-const form = document.getElementById("form-palpite");
-const categoriasContainer = document.getElementById("categorias-container");
+ // Criar formulário dinâmico
+ const form = document.getElementById("form-palpite");
+ const categoriasContainer = document.getElementById("categorias-container");
 
-for (const categoria in categorias) {
-    const div = document.createElement("div");
-    div.classList.add("categoria-box");
-    div.innerHTML = `<h3>${categoria}</h3>`;
+ for (const categoria in categorias) {
+     const div = document.createElement("div");
+     div.classList.add("categoria-box");
 
-    categorias[categoria].forEach(opcao => {
-        const label = document.createElement("label");
-        label.classList.add("opcao-label");
-        label.innerHTML = `
-            <input type="radio" name="${categoria}" value="${opcao}" required>
-            <span>${opcao}</span>
-        `;
-        div.appendChild(label);
-    });
+     const titulo = document.createElement("h3");
+     titulo.textContent = categoria;
+     div.appendChild(titulo);
 
-    categoriasContainer.appendChild(div);
-}
+     categorias[categoria].forEach(opcao => {
+         const label = document.createElement("label");
+         label.classList.add("opcao-label");
 
-// Evento de envio do formulário
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+         const input = document.createElement("input");
+         input.type = "radio";
+         input.name = categoria;
+         input.value = opcao;
+         input.required = true;
 
-    const palpites = {};
-    for (const categoria in categorias) {
-        const selecionado = document.querySelector(`input[name="${categoria}"]:checked`);
-        if (selecionado) palpites[categoria] = selecionado.value;
-    }
+         const span = document.createElement("span");
+         span.textContent = opcao;
 
-    try {
-        await setDoc(doc(collection(db, "palpites"), nomeUsuario), palpites);
-        window.location.href = "confirmar.html"; // Redireciona para a página de confirmação
-    } catch (error) {
-        console.error("Erro ao salvar:", error);
-    }
+         label.appendChild(input);
+         label.appendChild(span);
+         div.appendChild(label);
+     });
+
+     categoriasContainer.appendChild(div);
+ }
+
+ // Evento de envio do formulário
+ form.addEventListener("submit", async (e) => {
+     e.preventDefault();
+
+     const palpites = {};
+     for (const categoria in categorias) {
+         const selecionado = document.querySelector(`input[name="${categoria}"]:checked`);
+         if (selecionado) {
+             palpites[categoria] = selecionado.value;
+         } else {
+             alert(`Você precisa selecionar uma opção para: ${categoria}`);
+             return;
+         }
+     }
+
+     try {
+         await setDoc(doc(collection(db, "palpites"), nomeUsuario), palpites);
+         alert("Palpites salvos com sucesso!");
+         window.location.href = "confirmar.html"; // Redireciona para a página de confirmação
+     } catch (error) {
+         console.error("Erro ao salvar:", error);
+         alert("Erro ao salvar os palpites. Tente novamente.");
+     }
+ });
 });
