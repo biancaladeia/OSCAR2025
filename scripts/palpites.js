@@ -1,16 +1,11 @@
 import { db } from "./firebase.js";
 import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-
-// Recuperar o nome do usuário do sessionStorage
-const nomeUsuario = sessionStorage.getItem("nomeUsuario");
-
-// Se não houver nome salvo, redireciona para a página inicial
+// Obtendo o nome do usuário armazenado no LocalStorage
+const nomeUsuario = localStorage.getItem("nomeUsuario");
 if (!nomeUsuario) {
-    alert("Você precisa inserir seu nome antes de participar.");
-    window.location.href = "index.html";
+    window.location.href = "index.html"; // Redireciona para a página inicial se o nome não estiver salvo
 }
-
 
 // Lista de categorias e opções disponíveis
 const categorias = {
@@ -95,8 +90,9 @@ const categorias = {
     ]
 };
 
-// Criando o formulário dinamicamente
-const container = document.getElementById("categorias-container");
+// Criar formulário dinâmico
+const form = document.getElementById("form-palpite");
+const categoriasContainer = document.getElementById("categorias-container");
 
 for (const categoria in categorias) {
     const div = document.createElement("div");
@@ -106,28 +102,19 @@ for (const categoria in categorias) {
     categorias[categoria].forEach(opcao => {
         const label = document.createElement("label");
         label.classList.add("opcao-label");
-
-        const radio = document.createElement("input");
-        radio.type = "radio";
-        radio.name = categoria;
-        radio.value = opcao;
-        radio.required = true;
-
-        label.appendChild(radio);
-        label.innerHTML += `<span>${opcao}</span>`; // Adiciona o texto ao lado do botão
-
+        label.innerHTML = `
+            <input type="radio" name="${categoria}" value="${opcao}" required>
+            <span>${opcao}</span>
+        `;
         div.appendChild(label);
     });
 
-    container.appendChild(div);
+    categoriasContainer.appendChild(div);
 }
 
-// Evento para salvar os palpites no Firebase
-document.getElementById("form-palpite").addEventListener("submit", async (e) => {
+// Evento de envio do formulário
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    const nomeUsuario = prompt("Digite seu nome para salvar seu palpite:");
-    if (!nomeUsuario) return alert("Nome é obrigatório!");
 
     const palpites = {};
     for (const categoria in categorias) {
@@ -137,8 +124,7 @@ document.getElementById("form-palpite").addEventListener("submit", async (e) => 
 
     try {
         await setDoc(doc(collection(db, "palpites"), nomeUsuario), palpites);
-        alert("Palpite salvo com sucesso!");
-        window.location.href = "confirmar.html";
+        window.location.href = "confirmar.html"; // Redireciona para a página de confirmação
     } catch (error) {
         console.error("Erro ao salvar:", error);
     }
