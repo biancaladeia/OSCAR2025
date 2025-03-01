@@ -11,9 +11,8 @@
 body {
     font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
-    background: #0A0A0A;
+    background: #0A0A0A url('https://bolaomoviecom.com.br/img/bg.jpg') no-repeat center center/cover;
     color: #F5F5F5;
-    background: url('https://bolaomoviecom.com.br/img/bg.jpg') no-repeat center center/cover;
     min-height: 100vh;
 }
 
@@ -23,24 +22,30 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
 }
 
+/* ====== Título ====== */
 h1 {
     font-size: 2.5em;
     color: #D4AF37;
     margin-bottom: 20px;
 }
 
+/* ====== Formulário ====== */
 .form-container {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
 }
 
+/* ====== Campo de entrada de nome ====== */
 input {
     width: 80%;
-    padding: 10px;
+    padding: 12px;
     margin: 10px 0;
     border: none;
     border-radius: 5px;
@@ -48,6 +53,7 @@ input {
     text-align: center;
 }
 
+/* ====== Botões ====== */
 button {
     background-color: #D4AF37;
     color: #0A0A0A;
@@ -74,10 +80,12 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 90%;
+    max-width: 600px;
     margin: auto;
 }
 
+/* ====== Cada categoria ====== */
 .categoria-box {
     background: rgba(0, 0, 0, 0.6);
     padding: 15px;
@@ -86,13 +94,20 @@ button:hover {
     margin-bottom: 20px;
 }
 
+/* ====== Alinhamento das opções ====== */
 .opcao-label {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 12px;
     font-size: 1.1em;
     margin: 5px 0;
+}
+
+/* Ajuste para os inputs de rádio */
+.opcao-label input[type="radio"] {
+    width: 18px;
+    height: 18px;
 }
 
 /* Botão de confirmação no final */
