@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    console.log("Nome do usuário recuperado:", nomeUsuario); // Verifica se o nome foi salvo corretamente
 
 // Lista de categorias e opções disponíveis
 const categorias = {
@@ -145,12 +146,18 @@ const categorias = {
      }
 
      try {
-         await setDoc(doc(collection(db, "palpites"), nomeUsuario), palpites);
-         alert("Palpites salvos com sucesso!");
-         window.location.href = "confirmar.html"; // Redireciona para a página de confirmação
-     } catch (error) {
-         console.error("Erro ao salvar:", error);
-         alert("Erro ao salvar os palpites. Tente novamente.");
-     }
+        console.log("Salvando palpites no Firebase para usuário:", nomeUsuario);
+        console.log("Dados enviados:", palpites);
+
+        await setDoc(doc(collection(db, "palpites"), nomeUsuario), palpites);
+
+        alert("Palpites salvos com sucesso!");
+        window.location.href = "confirmar.html"; // Redireciona para a página de confirmação
+    } catch (error) {
+        console.error("Erro ao salvar no Firebase:", error);
+        alert("Erro ao salvar os palpites. Verifique o console para mais detalhes.");
+    }
  });
 });
+
+console.log("Firebase conectado:", db);
