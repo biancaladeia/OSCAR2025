@@ -3,59 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmação dos Palpites</title>
+    <title>Confirmação de Palpites - Bolão do Oscar 2025</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <h1>CONFIRMAÇÃO DOS PALPITES</h1>
-    <p>Confira suas escolhas antes de finalizar.</p>
-
-    <div id="confirmacao-container"></div>
+    <div class="brilho"></div>
     
-    <button id="finalizar-btn">Finalizar Palpites</button>
+    <h1>CONFIRMAÇÃO DOS SEUS PALPITES</h1>
+    
+    <div id="lista-confirmacao"></div>
+    <button id="confirmarBtn">Confirmar Palpites</button>
 
-    <script type="module">
-        import { db } from "./scripts/firebase.js";
-        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        // Obtém o nome do usuário do localStorage
-        const nomeUsuario = localStorage.getItem("nomeUsuario");
-
-        if (!nomeUsuario) {
-            alert("Erro: Nome do usuário não encontrado! Retornando para a página inicial.");
-            window.location.href = "index.html";
-        }
-
-        async function carregarPalpites() {
-            try {
-                const docRef = doc(db, "palpites", nomeUsuario);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const palpites = docSnap.data();
-                    const container = document.getElementById("confirmacao-container");
-                    container.innerHTML = `<h2>${nomeUsuario}</h2>`;
-
-                    for (const categoria in palpites) {
-                        container.innerHTML += `<p><strong>${categoria}:</strong> ${palpites[categoria]}</p>`;
-                    }
-                } else {
-                    alert("Erro: Nenhum palpite encontrado! Retornando para a página inicial.");
-                    window.location.href = "index.html";
-                }
-            } catch (error) {
-                console.error("Erro ao recuperar os palpites:", error);
-                alert("Erro ao carregar os palpites. Tente novamente.");
-                window.location.href = "index.html";
-            }
-        }
-
-        document.getElementById("finalizar-btn").addEventListener("click", () => {
-            alert("Sua aposta foi confirmada! Boa sorte!");
-            window.location.href = "obrigado.html";
-        });
-
-        carregarPalpites();
-    </script>
+    <script type="module" src="scripts/confirmar.js"></script>    
 </body>
 </html>

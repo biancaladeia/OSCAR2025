@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const nomeUsuario = localStorage.getItem("nomeUsuario");
     const palpitesConfirmacao = JSON.parse(localStorage.getItem("palpitesConfirmacao"));
 
+    console.log("Nome do usuário:", nomeUsuario);
+    console.log("Palpites para confirmação:", palpitesConfirmacao);
+
     if (!nomeUsuario || !palpitesConfirmacao) {
         alert("Erro: Nenhum palpite encontrado! Retornando para a página inicial.");
         window.location.href = "index.html";
@@ -9,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const listaConfirmacao = document.getElementById("lista-confirmacao");
+    if (!listaConfirmacao) {
+        console.error("Erro: Elemento 'lista-confirmacao' não encontrado no HTML.");
+        return;
+    }
     listaConfirmacao.innerHTML = "";
 
     for (const [categoria, escolha] of Object.entries(palpitesConfirmacao)) {

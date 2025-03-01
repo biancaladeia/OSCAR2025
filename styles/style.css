@@ -1,51 +1,64 @@
-/* ======= Importação de Fontes ======= */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto+Condensed:wght@400;700&display=swap');
-
-/* ======= Estilo Global ======= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 html, body {
+    overflow-x: hidden;
     width: 100%;
-    min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     color: #F5F5F5;
-    background-color: #0A0A0A;
+    min-height: 100vh;
     position: relative;
-    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* ======= Background Fixo ======= */
-body {
-    background: url('img/bg.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-
-/* ======= Confetes e Brilhos ======= */
-.confete, .brilho {
+/* ======= Background principal ======= */
+body::before {
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
+    background: url('../img/bg.jpg') no-repeat center center/cover;
+    z-index: -3;
+}
+
+/* ======= Brilhos e Confetes ======= */
+.confete, .brilho {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background-size: cover;
     pointer-events: none;
 }
 
 .confete {
-    background: url('img/confetes.png') no-repeat center center fixed;
-    background-size: cover;
+    background-image: url('../img/confetes.png');
+    z-index: -1;
+    opacity: 0.8;
+    animation: flutuar 10s linear infinite;
 }
 
 .brilho {
-    background: url('img/brilhos.png') no-repeat center center fixed;
-    background-size: cover;
-    z-index: -1;
+    background-image: url('../img/brilhos.png');
+    z-index: -2;
+    opacity: 0.6;
+    animation: brilhar 8s ease-in-out infinite alternate;
+}
+
+/* ====== Animações para dar efeito de movimento ====== */
+@keyframes flutuar {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes brilhar {
+    0% { opacity: 0.4; }
+    100% { opacity: 0.8; }
 }
 
 /* ====== Estrutura Central ====== */
@@ -172,7 +185,7 @@ input[type="radio"]:checked::before {
 }
 
 /* ====== Estilizando os palpites ====== */
-#categorias-container {
+#categoriasContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
