@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bolão do Oscar 2025 de Bibi</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Bem-vindo ao Bolão do Oscar 2025 de Bibi</h1>
+    <p>Insira seu nome para começar:</p>
+    <input type="text" id="nome" placeholder="Digite seu nome">
+    <button onclick="salvarNome()">Iniciar</button>
+  </div>
+
+  <script>
+    function salvarNome() {
+      const nome = document.getElementById("nome").value;
+      if (!nome) {
+        alert("Por favor, insira seu nome!");
+        return;
+      }
+      localStorage.setItem("nomeUsuario", nome);
+      window.location.href = "palpites.html";
+    }
+  </script>
+</body>
+</html>

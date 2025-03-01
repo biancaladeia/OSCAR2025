@@ -1,0 +1,181 @@
+/* ======= Importação de Fontes ======= */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto+Condensed:wght@400;700&display=swap');
+
+/* ======= Estilo Global ======= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    background: #0A0A0A;
+    color: #F5F5F5;
+}
+
+/* ======= Container Principal ======= */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ====== Estilizando a Caixa de Boas-Vindas ====== */
+.box {
+    z-index: 2;
+    background: #070301d9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* ======= Títulos ======= */
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: #D4AF37; /* Dourado */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+/* ======= Botões ======= */
+button {
+    background-color: #D4AF37; /* Dourado */
+    color: #0A0A0A;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #B8860B;
+    transform: scale(1.05);
+}
+
+/* ======= Formulário ======= */
+form {
+    background-color: rgba(14, 14, 14, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #D4AF37;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+input:focus {
+    outline: 2px solid #D4AF37;
+}
+
+/* ======= Lista de Palpites ======= */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #1C1C1C;
+    padding: 12px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border-left: 5px solid #D4AF37;
+}
+
+/* ======= Responsividade ======= */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    form {
+        width: 100%;
+    }
+}
+
+/* ======= Background Principal ======= */
+body {
+    background: url('https://bolaomoviecom.com.br/img/bg.jpg') no-repeat center center/cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* ======= Camada de Brilhos com Parallax ======= */
+.brilho {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150%;
+    height: 150%;
+    background: url('https://bolaomoviecom.com.br/img/brilhos.png') no-repeat center center/cover;
+    pointer-events: none; /* Para não interferir no clique do usuário */
+    z-index: 0;
+    transform: translate(-50px, -50px); /* Posição inicial */
+    transition: transform 0.1s ease-out; /* Suaviza o movimento */
+}
+
+
+h3 {
+    color: gold;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+button {
+    background-color: gold;
+    color: black;
+    font-size: 1.2em;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
